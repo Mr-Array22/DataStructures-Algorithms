@@ -1,0 +1,125 @@
+﻿#include <iostream>
+#include <cassert>
+using namespace std;
+
+//const int MAX_LEN = 100;
+template <class t>
+class Queue {
+
+    int front; // first , begin , start
+    int rear;//back , last ,tail, end
+    int counter;
+    int maxSize;
+    t *array;
+
+public:
+    Queue(int size) {
+        if (size <= 0)
+            maxSize = 100;
+        else
+            maxSize = size;
+        front = 0;
+        array = new t[maxSize];
+        rear = maxSize - 1;
+        counter = 0;
+    }
+
+    bool isEmpty() {
+        return counter == 0;
+    }
+
+    bool isFull() {
+        return counter == maxSize;
+    }
+
+    void Enqueue(t element) {
+        if (isFull())
+            cout << "Queue is full";
+        else {
+            rear = (rear + 1) % maxSize;
+            array[rear] = element;
+            counter++;
+        }
+    }
+
+    void Dequeue() {
+        if (isEmpty())
+            cout << "Queue is empty";
+        else {
+            front = (front + 1) % maxSize;
+            counter--;
+        }
+    }
+
+
+    int frontQueue() {
+        assert(!isEmpty());
+        return array[front];
+    }
+
+    void getFront(t &getFront) {
+        getFront= array[front];
+    }
+
+    int rearQueue() {
+        assert(!isEmpty());
+        return array[rear];
+    }
+
+    void getRear(t &getRear) {
+        getRear=array[rear];
+    }
+
+    void display() {
+        if (!isEmpty()) {
+            for (size_t i = front; i != rear ; i = (i + 1) % maxSize)
+            {
+                cout << array[i] << " ";
+            }
+            cout << array[rear]<<endl;
+        }
+        else
+            cout << "Queue is empty";
+    }
+
+     int getLength()
+    {
+        return counter;
+    }
+
+     int search(t element) {
+         int pos = -1;
+         if (!isEmpty()) {
+             for (int i = front; i != rear; i = (i + 1) % maxSize)
+             {
+                 if (array[i] == element) {
+                     pos = i;
+                     break;
+                 }
+             }
+             if (pos == -1) {
+                 if (array[rear] == element)
+                     pos = rear;
+             }
+         }
+         else
+             cout << "queue is empty";
+         return pos;
+     }
+
+};
+
+
+int main()
+{
+    Queue<char> q(5);
+    q.Enqueue('a');
+    q.Enqueue('b');
+    q.Enqueue('c');
+    q.Enqueue('d');
+    q.Enqueue('e');
+    q.display();
+    cout << q.search('a');
+    return 0;
+}
+

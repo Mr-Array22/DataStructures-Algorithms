@@ -1,0 +1,47 @@
+﻿
+
+#include <iostream>
+using namespace std;
+
+
+int BinarySearch(int arr[], int low,int high, int key)
+{
+    int mid = (low + high) / 2;
+	while (low<=high)
+	{
+		if (arr[mid] == key)
+			return mid;
+		if (arr[mid] > key)
+			high = mid - 1;
+		else
+			low = mid + 1;
+	}
+	return -1;
+}
+
+int BinarySearchRec(int arr[], int low, int high, int key)
+{
+	int mid = (low + high) / 2;
+	while (low <= high)
+	{
+		if (arr[mid] == key)
+			return mid;
+		if (arr[mid] > key)
+			BinarySearchRec(arr,low,mid-1,key);
+		else
+			BinarySearchRec(arr, mid+1, high, key);
+	}
+	return -1;
+}
+
+
+int main()
+{
+
+		int arr[] = { 90,10,40,70,5 };
+		int n = sizeof(arr) / sizeof(arr[0]);
+		cout<<BinarySearch(arr, 0, n-1, 40);
+		return 0;
+	
+}
+

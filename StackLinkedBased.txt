@@ -1,0 +1,110 @@
+﻿#include <iostream>
+
+using namespace std;
+template <class t>
+
+class stack {
+    struct Node {
+        t item;
+        Node* next;
+    };
+    Node* top, *current;
+
+public:
+    //constructor to initilize element
+    stack() {
+        top = NULL;
+    }
+
+
+    //add element to stack
+    void push(t element) {
+        Node* newItemptr = new Node;
+        if (newItemptr == NULL)
+            cout << "stack push can't allocte memeory";
+        else {
+            newItemptr->item = element;
+            newItemptr->next = top;
+            top = newItemptr;
+        }
+    }
+
+    //check if stack empty or not
+    bool isEmpty() {
+        return top == NULL;
+    }
+
+    //delete element 
+    void pop() {
+        if (isEmpty())
+            cout << "Stack is empty";
+        else {
+            Node* temp = new Node;
+            temp = top;
+            top = top->next;
+            temp->next = NULL;
+            delete temp;
+        }
+    }
+
+    //delete element with save the value
+    void pop(t& stackTop) {
+        if (isEmpty())
+            cout << "Stack is empty";
+        else {
+            stackTop = top->item;
+            Node* temp = new Node;
+            temp = top;
+            top = top->next;
+            temp->next = NULL;
+            delete temp;
+        }
+    }
+
+    //get the top element
+    void getTop(t& stackTop) {
+        if (isEmpty())
+            cout << "Stack is empty to get top";
+        else {
+            stackTop = top->item;
+
+        }
+    }
+
+    //check if stack full or not
+    bool isFull() {
+        return 0;
+    }
+
+    //print all elements in stack
+    void display() {
+
+        current = top;
+        cout << "[";
+        while (current!=NULL)
+        {
+            
+            cout << current->item << " ";
+            current = current->next;
+            
+        }
+        cout << "]";
+    }
+
+};
+
+
+int main()
+{
+    stack<int>s;
+    s.push(20);
+    s.push(30);
+    s.push(40);
+    s.push(50);
+    s.display();
+    int y;
+    s.getTop(y);
+    cout << y;
+    
+    return 0;
+}

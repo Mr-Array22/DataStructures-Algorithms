@@ -1,0 +1,32 @@
+﻿
+
+#include <iostream>
+using namespace std;
+
+
+int linearSearch(int arr[],int n,int key) {
+	for (size_t i = 0; i < n; i++)
+	{
+		if (arr[i] == key)
+			return i;
+	}
+	return -1;
+}
+
+void print(int arr[],int n) {
+	for (size_t i = 0; i < n; i++)
+	{
+		cout << arr[i] << " ";
+	}
+	cout << endl;
+}
+
+int main()
+{
+
+		int arr[] = { 90,10,40,70,5 };
+		int n = sizeof(arr) / sizeof(arr[0]);
+		cout<<linearSearch(arr, n, 40);
+		return 0;
+	
+}
